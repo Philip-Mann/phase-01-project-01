@@ -1,6 +1,6 @@
 var map = L.map('mapid').setView([38.9072, -77.0369], 6);
 function doMap() {
-    map.setView([lat, lon], 6);
+    map.setView([lat, lon], 10);
     //In setView make coordinates a variable so it will zoom in on current location
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
