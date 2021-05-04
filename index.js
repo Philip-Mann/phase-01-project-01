@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 
-const dataKey = {   //created a array that contains the OpenWeathe API key and base URL
+const dataKey = {   //created a array that contains the OpenWeather API key and base URL
   key: "61cf3cec929d0aa862f5acfcf1df83c8",
   base: "https://api.openweathermap.org/data/2.5/"
 };
@@ -147,47 +147,48 @@ function renderDailyForecast(daily){ //renders the forecast into casrds on a car
 function togglePageStyle(globalIconCode) {
   let allCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "10d", "11d", "13d", "50d"]
   //d for day n for night ------ 01 Clear    02 Few    03 Scattered    04 Broken    09 Shower    10 Rain    11 Thunderstorm    13 Snow    50 Mist/Fog
-  if(globalIconCode == allCodes[0]) {
-    document.body.style.backgroundImage = "url('./images/Clear-D.jpg')";
-  }
-  else if (globalIconCode == allCodes[1]) {
-    document.body.style.backgroundImage = "url('./images/Clear-N.jpg')";
-  }
-  else if (globalIconCode == allCodes[2]) {
-    document.body.style.backgroundImage = "url('./images/Few-D.jpg')";
-  }
-  else if (globalIconCode == allCodes[3]) {
-    document.body.style.backgroundImage = "url('./images/Few-N.jpg')";
-  }
-  else if (globalIconCode == allCodes[4]) {
-    document.body.style.backgroundImage = "url('./images/Scattered-D.jpg')";
-  }
-  else if (globalIconCode == allCodes[5]) {
-    document.body.style.backgroundImage = "url('./images/Scattered-N.jpg')";
-  }
-  else if (globalIconCode == allCodes[6]) {
-    document.body.style.backgroundImage = "url('./images/Broken-D.jpg')";
-  }
-  else if (globalIconCode == allCodes[7]) {
-    document.body.style.backgroundImage = "url('./images/Broken-N.jpg')";
-  }
-  else if (globalIconCode == allCodes[8]) {
-    document.body.style.backgroundImage = "url('./images/Shower.jpg')";
-  }
-  else if (globalIconCode == allCodes[9]) {
-    document.body.style.backgroundImage = "url('./images/Rain.jpg')";
-  }
-  else if (globalIconCode == allCodes[10]) {
-    document.body.style.backgroundImage = "url('./images/Thunderstorm.jpg')";
-  }
-  else if (globalIconCode == allCodes[11]) {
-    document.body.style.backgroundImage = "url('./images/Snow.jpg')";
-  }
-  else if (globalIconCode == allCodes[12]) {
-    document.body.style.backgroundImage = "url('./images/Mist.jpg')";
-  }
-};
 
+switch (globalIconCode) {
+  case allCodes[0]:
+    document.body.style.backgroundImage = "url('./images/Clear-D.jpg')";
+    break;
+  case allCodes[1]:
+    document.body.style.backgroundImage = "url('./images/Clear-N.jpg')";
+    break;
+  case allCodes[2]:
+    document.body.style.backgroundImage = "url('./images/Few-D.jpg')";
+    break;
+  case allCodes[3]:
+    document.body.style.backgroundImage = "url('./images/Few-N.jpg')";
+    break;
+  case allCodes[4]:
+    document.body.style.backgroundImage = "url('./images/Scattered-D.jpg')";
+    break;
+  case allCodes[5]:
+    document.body.style.backgroundImage = "url('./images/Scattered-N.jpg')";
+    break;
+  case allCodes[6]:
+    document.body.style.backgroundImage = "url('./images/Broken-D.jpg')";
+    break;
+  case allCodes[7]:
+    document.body.style.backgroundImage = "url('./images/Broken-N.jpg')";
+    break;
+  case allCodes[8]:
+    document.body.style.backgroundImage = "url('./images/Shower.jpg')";
+    break;
+  case allCodes[9]:
+    document.body.style.backgroundImage = "url('./images/Rain.jpg')";
+    break;
+  case allCodes[10]:
+    document.body.style.backgroundImage = "url('./images/Thunderstorm.jpg')";
+    break;
+  case allCodes[11]:
+    document.body.style.backgroundImage = "url('./images/Snow.jpg')";
+    break;
+  case allCodes[12]:
+    document.body.style.backgroundImage = "url('./images/Mist.jpg')";
+    break;
+}};
 
 function titleCase(str) {
     str = str.toLowerCase().split(' ');
