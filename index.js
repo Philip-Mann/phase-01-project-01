@@ -1,9 +1,6 @@
-const main = document.getElementById("weather-widget");
-const forecast = document.getElementById("weather-carousel");
 var globalIconCode
 document.addEventListener("DOMContentLoaded", function(){
-  // const main = document.getElementById("weather-widget");
-  // const forecast = document.getElementById("weather-carousel");
+  const main = document.getElementById("weather-widget");
   geoFindMe(main); // calls the location function as the page starts
   
   const searchSubmit = document.getElementById("submit-button");    //grabs the submit button out of the DOM
@@ -16,10 +13,9 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 
-const dataKey = {   //created a array that contains the OpenWeather API key and base URL
+const dataKey = {   //created a array that contains the OpenWeathe API key and base URL
   key: "61cf3cec929d0aa862f5acfcf1df83c8",
-  base: "https://api.openweathermap.org/data/2.5/weather?",
-  forecast: "https://api.openweathermap.org/data/2.5/onecall?"
+  base: "https://api.openweathermap.org/data/2.5/"
 };
 
 
@@ -49,10 +45,10 @@ function isCoord(searchString) {
 function getOpenWeatherResults(searchString){ // this function will make the request from the open weather API
   let url; //=`${dataKey.base}weather?q=${searchString}&units=imperial&APPID=${dataKey.key}`;
   if(isCoord(searchString)){
-    url =`${dataKey.base}lat=${lat}&lon=${lon}&units=imperial&APPID=${dataKey.key}`;
+    url =`${dataKey.base}weather?lat=${lat}&lon=${lon}&units=imperial&APPID=${dataKey.key}`;
   }
   else{
-    url =`${dataKey.base}q=${searchString}&units=imperial&APPID=${dataKey.key}`;
+    url =`${dataKey.base}weather?q=${searchString}&units=imperial&APPID=${dataKey.key}`;
   };
   axios.get(url).then(res =>{
     console.log(res);   //displays weather data in console
@@ -71,38 +67,19 @@ function getOpenWeatherResults(searchString){ // this function will make the req
         return item.description.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));   //will capitalize the first letter of every word in a string
       });
     }
-    lon = weather.coord.lon; //global variable defined in location.js
-    lat = weather.coord.lat; //global variable defined in location.js
-    //function call to get forecast data
-    getForecastResults(lon, lat);
-    //=========Forecast===============
     globalIconCode = iconCode;
     togglePageStyle(globalIconCode);
     console.log(globalIconCode);
     renderWeatherData("weather-widget", location, country, current, feelsLike, high, low, iconCode, iconUrl, description) //function to use data from API response in my render
   })
   .catch(err =>{
-    console.log("the current weather program errored");
+    console.log("the program errored");
+    // alert('Try again you donut!')
     console.log(err);
   })
 }
 
-function getForecastResults(longitude, latitude){
-  let url= `${dataKey.forecast}lat=${latitude}&lon=${longitude}&units=imperial&APPID=${dataKey.key}`; // makes call to get data from API for future forecast
-
-  axios.get(url).then(res =>{ //api call for 7 day forecast data
-    // console.log(res.data.daily); //this is the directory for daily data that we are looking for
-    const daily = res.data.daily;
-    forecast.innerHTML = renderDailyForecast(daily); // sets the inner html of the carousel to the render which passes the data path above
-  })
-  .catch(err=>{
-    console.log("the forecast weather program errored");
-    console.log(err);
-  })
-};
-
-
-function renderWeatherData(widget, location, country, current, feelsLike, high, low, iconCode, iconUrl, description) {    //Function that renders the data
+const renderWeatherData = (widget, location, country, current, feelsLike, high, low, iconCode, iconUrl, description) => {    //Function that renders the data
   const target = document.getElementById(widget);
   // console.log(description);
   target.innerHTML = `
