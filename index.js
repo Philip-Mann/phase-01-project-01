@@ -102,7 +102,47 @@ const renderWeatherData = (widget, location, country, current, feelsLike, high, 
     </div>
   </div>
   `;
-}
+};
+
+function renderDailyForecast(daily){ //renders the forecast into casrds on a carousel
+  console.log("we are in the render function");
+  let printed = daily.map((item, index) =>{
+    if(index==0){ //specifies the first active item on the carousel
+      return `
+      <div class="carousel-item active">
+        <div class="card mb-3 w-disp special-card">
+            <div class="card-body">
+              <h5 class="card-title">${moment(item.dt*1000).format("MMM DD")}<img src="https://openweathermap.org/img/w/${item.weather[0].icon}.png" alt="${item.weather[0].description}" /></h5>
+              <p class="card-text">
+                <h5 class="current-weather">${Math.round(item.temp.day)}°F</h5>
+                <p class="high-low">${Math.round(item.temp.max)}/${Math.round(item.temp.min)}°F</p>
+                <p class="description">${titleCase(item.weather[0].description)}</p>
+              </p>
+            </div>
+        </div>
+      </div>
+      `;
+    }
+    else{ // all remaining items rendered afterward in here (difference seen on first div class name)
+      return `
+      <div class="carousel-item">
+        <div class="card mb-3 w-disp special-card">
+          <div class="card-body">
+            <h5 class="card-title">${moment(item.dt*1000).format("MMM DD")}<img src="https://openweathermap.org/img/w/${item.weather[0].icon}.png" alt="${item.weather[0].description}" /></h5>
+            <p class="card-text">
+              <h5 class="current-weather">${Math.round(item.temp.day)}°F</h5>
+              <p class="high-low">${Math.round(item.temp.max)}/${Math.round(item.temp.min)}°F</p>
+              <p class="description">${titleCase(item.weather[0].description)}</p>
+            </p>
+          </div>
+        </div>
+      </div>
+      `;  
+    };
+  })
+  return printed.join("");
+};
+
 
 function togglePageStyle(globalIconCode) {
   let allCodes = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "10d", "11d", "13d", "50d"]
@@ -145,4 +185,14 @@ function togglePageStyle(globalIconCode) {
   }
   else if (globalIconCode == allCodes[12]) {
     document.body.style.backgroundImage = "url('./images/Mist.jpg')";
-  }}
+  }
+};
+
+
+function titleCase(str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+    }
+    return str.join(' ');
+};
