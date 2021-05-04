@@ -96,7 +96,7 @@ const renderWeatherData = (widget, location, country, current, feelsLike, high, 
               <p class="feels-like">Feels Like: ${Math.round(feelsLike)}°F</p>
               <p class="description">${description}</p>
             </p>
-            <p style="position: absolute; right:-80px; top:130px;"> <img class="icon" style=" height:100px; width:100px;" src="${iconUrl}${iconCode}.png" alt="${description}"/></p>
+            <img class="icon" src="${iconUrl}${iconCode}.png" alt="${description}"/>
           </div>
         </div>
       </div>
