@@ -89,3 +89,22 @@ h5 {
 p {
   font-size: 1.5rem;
 }
+
+.btn-primary {
+  color: black;
+}
+
+.carousel-inner div{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* @media only screen and (max-width: 767px) {
+  .carousel-item {
+      text-align: left;
+  }
+} */
+.card-body{
+  width: 100%;
+  text-align: left;
+}
